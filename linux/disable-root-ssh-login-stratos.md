@@ -50,25 +50,6 @@ Repeat Step 2 for each of the three app servers (stapp01, stapp02, stapp03).
 
 ---
 
-## Optional: Create a Helper Script (Local Use Only)
-You can store these commands as a helper script for easy reference:
-
-```bash
-cat << 'EOF' > disable_root_ssh_manual.sh
-# Commands to run on each app server
-sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
-sudo systemctl restart sshd
-sudo grep PermitRootLogin /etc/ssh/sshd_config
-EOF
-```
-
-To view it later:
-```bash
-cat disable_root_ssh_manual.sh
-```
-
----
-
 ## Verification
 Attempt to SSH as root to verify that login is now blocked:
 
@@ -80,7 +61,3 @@ You should receive a **Permission denied** message — this confirms the configu
 
 ---
 
-## Notes
-- No external tools like `sshpass` are required.
-- All changes are made using built-in Linux tools.
-- Ensure all users with administrative access are members of the `sudo` group.
